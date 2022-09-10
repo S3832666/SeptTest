@@ -15,45 +15,36 @@ import com.SeptTest.demo.dao.ProductDao;
 import com.SeptTest.demo.model.Product;
 
 @RestController
-public class ProductController 
-{
-	
+public class ProductController {
+
 	private ProductDao productDao;
-	
-	ProductController(ProductDao productDao){
+
+	ProductController(ProductDao productDao) {
 		this.productDao = productDao;
 	}
-	
-	
 
 	@PostMapping("/item")
-	public void createProduct(@RequestBody Item item) {
+	public void createProduct(@RequestBody Product item) {
 		productDao.createProduct(item);
 	}
-	
-	
 
 	@GetMapping("/item/{id}")
-	public Item getProduct(@PathVariable int id) {
+	public Product getProduct(@PathVariable int id) {
 		return productDao.getProduct(id);
 	}
-	
 
 	@GetMapping("/item/item")
-	public List<Item> getAll(){
-		return productDao.getAllItems();
+	public List<Product> getAll() {
+		return productDao.getAllProducts();
 	}
-	
-	
-	
+
 	@PutMapping("/item/{name}")
-	public void updateProduct(@PathVariable String name, @RequestBody Item item) {
+	public void updateProduct(@PathVariable String name, @RequestBody Product item) {
 		productDao.updateProduct(item);
 	}
-	
 
 	@DeleteMapping("/item/{name}")
 	public void DeleteProduct(@PathVariable String name) {
-		productDao.DeleteProduct(name);
+		productDao.deleteProduct(name);
 	}
 }
